@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  nestjs-postgres:
+    container_name: nestjs-postgres
+    image: postgres:14
+    env_file:
+      - .env
+    volumes:
+      - postgres:/var/www/nestjs-pg/docker-volumes/postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  nestjs-pgadmin:
+    container_name: nestjs-pgadmin
+    image: dpage/pgadmin4
+    env_file:
+      - .env
+    volumes:
+      - pgadmin:/var/www/nestjs-pg/docker-volumes/pgadmin
+    ports:
+      - 5050:80
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin:
